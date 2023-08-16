@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Element{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="row mt-5">
+        <div class="col-md-5 col-sm-6">
+        </div>
+        <a href="{% url 'home' %}">< Back</a>
+    </div>
+</div>
+<div class="container">
+    <div class="col my-4">
+        <h2>list</h2>
+        <form method="get" action="#" id="trackerForm">{% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="startdate">Start Date</label>
+                    <input type="datetime-local" class="form-control" id="start_date" name="start_date"
+                           placeholder="start date">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="enddate">End Date</label>
+                    <input type="datetime-local" class="form-control" id="end_date" name="end_date"
+                           placeholder="end date">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="userid">User ID</label>
+                    <input type="username" class="form-control" id="user_id" name="user_id" placeholder="user id">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Get</button>
+            </div>
+        </form>
+    </div>
+    <br>
+
+    {% if queryset %}
+    <div class="col my-4">
+        <label for="userid"><b>User ID: </b></label> <b>{{request.user}}</b><br>
+        {% for set in queryset %}
+        <label for="timestamp"><b>timestamp: </b></label> {{set.input_time}} <br>
+        <label for="inputvalues"><b>input values: </b></label> {{set.input_values}} <br><br>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}
