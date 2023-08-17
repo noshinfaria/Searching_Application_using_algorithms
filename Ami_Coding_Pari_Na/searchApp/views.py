@@ -88,7 +88,7 @@ def search_element(request):
 
 
 @api_view(['GET', 'POST'])
-# @authentication_classes([TokenAuthentication])
+@authentication_classes([TokenAuthentication])
 @permission_classes((IsAuthenticated,))
 def list_user_input(request):
     if request.method == 'GET':
